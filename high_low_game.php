@@ -30,7 +30,7 @@ if (ctype_digit($min) && ctype_digit($max)) {
 	$number = mt_rand ( 1 , $max);
 
 	if ($difficulty == 10) {
-		fwrite(STDOUT, "I hate you. Seriously. I don't have this kind of time, but I literally have no choice but to go through with this because I'm a freaking laptop. *sigh*....I'm thinking of a number between 1 and $max. What's your guess, jerk?\n");
+		fwrite(STDOUT, "I hate you. Seriously. I don't have this kind of time, but I literally have no choice but to go through with this because I'm a freaking laptop. *sigh* ...I'm thinking of a number between 1 and $max. What's your guess, jerk?\n");
 		$guess = fgets(STDIN);
 	} elseif ($difficulty >= 6) {
 		fwrite(STDOUT, "Well....this is going to take a while, but I can deal... I'm thinking of a number between 1 and $max. What's your first guess?\n");
