@@ -1,30 +1,47 @@
 <?php 
 
+sort($argv);
 
-// ask for difficulty
-do  {
-	// Ask for difficulty level
-	fwrite(STDOUT, "On a scale of one to ten, how difficult do you want this game to be?\nUsing the number keys, enter your desired difficulty from 1-10.\n(Hint: Choose something below 4.)\n");
+if ($argc == 3) {
+	$min = $argv[0];
+	$max = $argv[1];
+} else {
+	$min = "blank";
+	$max = "blank";
+}
 
-	// Get the user's desired difficulty level
-	$difficulty = fgets(STDIN);
-} while ($difficulty > 10 || $difficulty < 1);
 
-$max = pow(100, $difficulty);
-$number = mt_rand ( 1 , $max);
+// Determine difficulty
 
-if ($difficulty == 10) {
-	fwrite(STDOUT, "I hate you. Seriously. I don't have this kind of time, but i literally have no choice but to go through with this because I'm a freaking laptop. *sigh*....I'm thinking of a number between 1 and $max. What's your guess, jerk?\n");
-	$guess = fgets(STDIN);
-} elseif ($difficulty >= 6) {
-	fwrite(STDOUT, "Well....this is going to take a while, but I can deal... I'm thinking of a number between 1 and $max. What's your first guess?\n");
-	$guess = fgets(STDIN);
-} elseif ($difficulty == 5) {
-	fwrite(STDOUT, "You're looking for a challenge....I respect that! I'm thinking of a number between 1 and $max. What's your first guess?\n");
+if (ctype_digit($min) && ctype_digit($max)) {
+	$number = mt_rand ( $min , $max);
+	fwrite(STDOUT, "I'm thinking of a number between $min and $max. What's your first guess?\n");
 	$guess = fgets(STDIN);
 } else {
-	fwrite(STDOUT, "Keep it simple. Good choice. I'm thinking of a number between 1 and $max. What's your first guess?\n");
-	$guess = fgets(STDIN);
+	do  {
+		// Ask for difficulty level
+		fwrite(STDOUT, "On a scale of one to ten, how difficult do you want this game to be?\nUsing the number keys, enter your desired difficulty from 1-10.\n(Hint: Choose something below 4.)\n");
+
+		// Get the user's desired difficulty level
+		$difficulty = fgets(STDIN);
+	} while ($difficulty > 10 || $difficulty < 1);
+
+	$max = pow(100, $difficulty);
+	$number = mt_rand ( 1 , $max);
+
+	if ($difficulty == 10) {
+		fwrite(STDOUT, "I hate you. Seriously. I don't have this kind of time, but I literally have no choice but to go through with this because I'm a freaking laptop. *sigh*....I'm thinking of a number between 1 and $max. What's your guess, jerk?\n");
+		$guess = fgets(STDIN);
+	} elseif ($difficulty >= 6) {
+		fwrite(STDOUT, "Well....this is going to take a while, but I can deal... I'm thinking of a number between 1 and $max. What's your first guess?\n");
+		$guess = fgets(STDIN);
+	} elseif ($difficulty == 5) {
+		fwrite(STDOUT, "You're looking for a challenge....I respect that! I'm thinking of a number between 1 and $max. What's your first guess?\n");
+		$guess = fgets(STDIN);
+	} else {
+		fwrite(STDOUT, "Keep it simple. Good choice. I'm thinking of a number between 1 and $max. What's your first guess?\n");
+		$guess = fgets(STDIN);
+	}
 }
 
 $guessNum = 0;
